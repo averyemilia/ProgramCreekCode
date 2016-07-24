@@ -1,5 +1,11 @@
-#Given the list [[1,1],2,[1,1]], return 10. (four 1's at depth 2, one 2 at depth 1)
+"""
+Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
 
+Each element is either an integer, or a list -- whose elements may also be integers or other lists.
+
+Example 1:
+Given the list [[1,1],2,[1,1]], return 10. (four 1's at depth 2, one 2 at depth 1)
+"""
 
 def depthSum(numList):
     numMap = {}
@@ -10,23 +16,24 @@ def depthSum(numList):
    
             
 def evaluateInt(num, level, total, numMap):
-    print num
+    #print num
     if num not in numMap:
         numMap[num] = [level]
     else:
         numMap[num].append(level)
     total += num * level
-    print level, total, numMap
+    #print level, total, numMap
     return level, total, numMap
             
+
 def evaluateList(numList, level, total, numMap):
-        print "List is {0}".format(numList)
+        #print "List is {0}".format(numList)
         for num in numList:
             try:
                 x = int(num)
                 level, total, numMap = evaluateInt(num, level,total,numMap)
             except TypeError:
-                print "comes here for {0}".format(num)
+                #print "Num  is  {0}".format(num)
                 numList, level, total, numMap = evaluateList(num, level+1, total, numMap)
         return numList, level - 1, total, numMap
        
